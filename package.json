@@ -1,0 +1,15 @@
+{
+  "name": "nodewebook",
+  "version": "1.0.0",
+  "description": "Sistema desarrollo web con Node",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "web"
+  ],
+  "author": "Rivalcoba",
+  "license": "ISC"
+}
