@@ -14,9 +14,9 @@ app.set('views', __dirname + '/views');
 app = config(app);
 
 // Routing
-app.get('/', function(req, res){
+/*app.get('/', function(req, res){
     res.send('Hola ITGAM');
-});
+});*/
 // Starting Server
 app.listen(app.get('port'), app.get('ip'), function(){
     console.log("> Server listenig @http://%s:%s",

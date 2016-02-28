@@ -1,0 +1,9 @@
+- Se crea boilerplate
+- Se crea hola mundo
+- Se Incorporan modulos de soporte web 
+- Se incorporan rutas
+-- Se crea el archivo routes.js dentro del
+-- directorio server
+- Crear los archivos home.js, image.js dentro del
+-- folder controllers
+-- TODO 1440 rellenar los controllers de image.js

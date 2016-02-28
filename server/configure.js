@@ -1,7 +1,7 @@
 /* global __dirname */
 // importing dependencies
 var path = require('path'),
-    //routes = require('./routes'),
+    routes = require('./routes'),
     exphdb = require('express-handlebars'),
     express = require('express'),
     bodyParser = require('body-parser'),
@@ -19,7 +19,7 @@ module.exports = function(app){
     app.use(cookieParser('alugn-valor-secreto-aqui'));
     
     // Moving the routes to router folder
-    //routes(app);
+    routes(app);
     
     // Static midleware is put at the end
     app.use('/public/',
