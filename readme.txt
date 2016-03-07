@@ -6,4 +6,5 @@
 -- directorio server
 - Crear los archivos home.js, image.js dentro del
 -- folder controllers
--- TODO 1440 rellenar los controllers de image.js
+-- rellenar los controllers de image.js
+- Custom Middleware ans configuration of Handlebars

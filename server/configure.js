@@ -27,5 +27,16 @@ module.exports = function(app){
     if('development' === app.get('env')){
         app.use(errorHandler());
     }
+    
+    // Configuring handlebars template engine
+    app.engine('handlebars', exphdb.create({
+        defaultlayout : 'main',
+        layoutsDir : app.get('views') + '/layouts',
+        partialsDir : [app.get('views') + '/partials']
+    }).engine);
+    
+    // Crear template engine
+    app.set('view engine', 'handlebars');
+    
     return app;
 };
