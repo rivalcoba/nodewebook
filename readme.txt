@@ -7,4 +7,6 @@
 - Crear los archivos home.js, image.js dentro del
 -- folder controllers
 -- rellenar los controllers de image.js
-- Custom Middleware ans configuration of Handlebars
+- Custom Middleware and configuration of Handlebars
+- Se crean las vistas
+- todo:1820 The basic of Handlebars

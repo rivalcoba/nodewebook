@@ -8,7 +8,8 @@ var path = require('path'),
     cookieParser = require('cookie-parser'),
     morgan = require('morgan'),
     methodOverride = require('method-override'),
-    errorHandler = require('errorhandler');
+    errorHandler = require('errorhandler'),
+    moment = require('moment');
 
 module.exports = function(app){
     // Inserting midleware
@@ -30,9 +31,16 @@ module.exports = function(app){
     
     // Configuring handlebars template engine
     app.engine('handlebars', exphdb.create({
-        defaultlayout : 'main',
+        defaultLayout : 'main',
         layoutsDir : app.get('views') + '/layouts',
-        partialsDir : [app.get('views') + '/partials']
+        partialsDir : [app.get('views') + '/partials'],
+        // Adding a helper
+        helpers : {
+            timeago : function(timestamp){
+                return moment(timestamp)
+                .startOf('minute').fromNow();
+            }
+        }
     }).engine);
     
     // Crear template engine
