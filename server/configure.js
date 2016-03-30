@@ -9,26 +9,10 @@ var path = require('path'),
     morgan = require('morgan'),
     methodOverride = require('method-override'),
     errorHandler = require('errorhandler'),
-    moment = require('moment');
+    moment = require('moment'),
+    multer = require('multer');
 
 module.exports = function(app){
-    // Inserting midleware
-    app.use(morgan('dev'));
-    app.use(bodyParser.urlencoded({'extended': true}));
-    app.use(bodyParser.json());
-    app.use(methodOverride());
-    app.use(cookieParser('alugn-valor-secreto-aqui'));
-    
-    // Moving the routes to router folder
-    routes(app);
-    
-    // Static midleware is put at the end
-    app.use('/public/',
-    express.static(path.join(__dirname, '../public')));
-    if('development' === app.get('env')){
-        app.use(errorHandler());
-    }
-    
     // Configuring handlebars template engine
     app.engine('handlebars', exphdb.create({
         defaultLayout : 'main',
@@ -42,6 +26,27 @@ module.exports = function(app){
             }
         }
     }).engine);
+    
+    // Inserting midleware
+    app.use(morgan('dev'));
+    app.use(bodyParser.urlencoded({'extended': true}));
+    app.use(bodyParser.json());
+    app.use(methodOverride());
+    app.use(cookieParser('alugn-valor-secreto-aqui'));
+    
+    
+    // Moving the routes to router folder
+    routes(app);
+    
+    // Static midleware is put at the end
+    // Lugar para la carga de imagenes
+    app.use(multer({dest: path.join(__dirname, 'public/upload/temp')}).any());
+    // Archivos estáticos
+    app.use('/public/',
+    express.static(path.join(__dirname, '../public')));
+    if('development' === app.get('env')){
+        app.use(errorHandler());
+    };
     
     // Crear template engine
     app.set('view engine', 'handlebars');
