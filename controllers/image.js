@@ -36,32 +36,35 @@ module.exports = {
         res.render('image', viewModel);
     },
     create: function(req, res){
-        console.log("CREATE");
-        // var saveImage = function(){
-        //     // Generating a six digit alpha numeric code
-        //     var possible = "abcdefghijklmnñopqrstuvwxyz123456789",
-        //         imgUrl = '';
-        //     for(var i=0; i < 6; i++){
-        //         imgUrl += possible.charAt(Math.floor(Math.random() * possible.length));
-        //     }
-        //     // creating the storing path
-        //     var temPath = req.files.file.path,
-        //         ext = path.extname(req.files.file.name).toLowerCase,
-        //         targetPath = path.resolve('./public/upload' + imgUrl + ext);
-        //     if(ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif'){
-        //         fs.rename(temPath, targetPath, function(err){
-        //             if(err) throw err;
-        //             res.redirect('/images/' + imgUrl);
-        //         });
-        //     }else{
-        //         fs.unlink(temPath, function(err){
-        //             if(err) throw err;
-        //             res.json(500, {error: 'Solo los archivos de imagenes estan permitidos'});
-        //         });
-        //     }
-        // };
-        // saveImage();
-        res.send('The image:like POST controller');
+        var saveImage = function(){
+            // Generating a six digit alpha numeric code
+            var possible = "abcdefghijklmnñopqrstuvwxyz123456789",
+                imgUrl = '';
+            for(var i=0; i < 6; i++){
+                imgUrl += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            // creating the storing path            
+            var tempPath = req.files[0].path,
+                ext = path.extname(req.files[0].originalname).toLowerCase(),
+                targetPath = path.resolve('./public/upload/' + imgUrl + ext);
+                console.log(">> ext: " + ext);
+                console.log(">> targetPath: %s", targetPath);
+            if(ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif'){
+                fs.rename(tempPath, targetPath, function(err){
+                    if(err) throw err;
+                    res.redirect('/images/' + imgUrl);
+                });
+            }else{
+                // unlink borra el archivo
+                fs.unlink(tempPath, function(err){
+                    if(err) throw err;
+                    console.log(">> DELTED FILE: %s", tempPath);
+                    res.status(500).json({error: 'Solo los archivos de imagenes estan permitidos'});
+                });
+            }
+        };
+        saveImage();
+        //res.status(200).json(req.files[0]);
     },
     like : function(req, res){
         res.send('The image:like POST controller');

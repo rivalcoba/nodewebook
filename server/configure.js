@@ -13,6 +13,8 @@ var path = require('path'),
     multer = require('multer');
 
 module.exports = function(app){
+    // Lugar para la carga de imagenes
+   
     // Configuring handlebars template engine
     app.engine('handlebars', exphdb.create({
         defaultLayout : 'main',
@@ -33,14 +35,13 @@ module.exports = function(app){
     app.use(bodyParser.json());
     app.use(methodOverride());
     app.use(cookieParser('alugn-valor-secreto-aqui'));
-    
+    // Habilita la carga de archivos desde el cliente multipart/form
+    app.use(multer({dest: path.join(__dirname, 'public/upload/temp')}).any());
     
     // Moving the routes to router folder
     routes(app);
     
     // Static midleware is put at the end
-    // Lugar para la carga de imagenes
-    app.use(multer({dest: path.join(__dirname, 'public/upload/temp')}).any());
     // Archivos estáticos
     app.use('/public/',
     express.static(path.join(__dirname, '../public')));
