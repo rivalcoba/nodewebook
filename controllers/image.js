@@ -70,7 +70,7 @@ module.exports = {
         //res.status(200).json(req.files[0]);
     },
     like : function(req, res){
-        res.send('The image:like POST controller');
+        res.json({likes: 1});
     },
     comment: function(req, res){
         res.send('The image:comment POST controller');
