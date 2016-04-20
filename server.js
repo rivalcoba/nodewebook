@@ -7,11 +7,19 @@ var express = require('express');
 var config = require('./server/configure');
 // Getting app instance
 var app = express();
+// Requiring Mongoose
+var mongoose = require('mongoose');
 // Setting some configuration
 app.set('port', process.env.PORT || 3000);
 app.set('ip', process.env.IP || '127.0.0.1');
 app.set('views', __dirname + '/views');
 app = config(app);
+
+// Connectiong to mongodb
+mongoose.connect('mongodb://localhost/imgPloadr');
+mongoose.connection.on('open',()=>{
+    console.log(">> Mongoose connected");
+});
 
 // Routing
 /*app.get('/', function(req, res){
