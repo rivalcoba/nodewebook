@@ -9,7 +9,7 @@ var CommentSchema = new Schema({
     name: {type: String},
     gravatar: {type: String},
     comment: {type: String},
-    timestamp: {type: Date, 'default': Date.now}
+    timestamp: {type: Date, 'default': Date.now()}
 });
 
 // Create a virtual

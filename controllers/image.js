@@ -1,42 +1,44 @@
 var fs = require('fs'),
     path = require('path'),
     sidebar = require('../helpers/sidebar');
+// Models Imports
+var Models = require('../models/index');
 
 module.exports = {
     index: function(req, res){
         // Creating a viewModel
         var viewModel = {
-            image: {
-                uniqueId: 1,
-                title: "Sample Image 1",
-                description: '',
-                filename: 'sample1.jpg',
-                views: 0,
-                likes: 0,
-                timestamp: Date.now()
-            },
-            comments: [
-                {
-                    image_id: 1,
-                    email: 'test@testing.com',
-                    name: 'Test Tester',
-                    gravatar: 'http://lorempixel.com/75/75/animals/1',
-                    comment : "This is a test comment",
-                    timestamp: Date.now()
-                },
-                {
-                   image_id: 2,
-                    email: 'test@testing.com',
-                    name: 'Test Tester',
-                    gravatar: 'http://lorempixel.com/75/75/animals/2',
-                    comment : "This is a test comment",
-                    timestamp: Date.now()
-                }
-            ]
+            image: {},
+            comments: []
         };
-        sidebar(viewModel, function(viewModel){
-           res.render('image', viewModel); 
-        });
+        // Loading image from models
+        Models.Image.findOne(
+            {filename: {$regex: req.params.image_id}},
+            (err, image)=>{
+                if(err){throw err;}
+                if(image){
+                    // Increment image counter
+                    image.views = image.views + 1;
+                    // Loading image into the model
+                    viewModel.image = image;
+                    // saving image into the db
+                    // using mongoose schema
+                    image.save();
+                    Models.Comment.find({
+                        image_id: image._id
+                    },{},{
+                        sort:{'timestamp': 1}
+                    },(err, comments)=>{
+                        if(err){throw err;}
+                        viewModel.comments = comments;
+                        sidebar(viewModel, function(viewModel){
+                            res.render('image', viewModel);
+                        });
+                    });
+                }else{
+                    res.redirect('/');
+                }
+            });
     },
     create: function(req, res){
         var saveImage = function(){
