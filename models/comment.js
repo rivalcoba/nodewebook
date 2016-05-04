@@ -20,4 +20,4 @@ CommentSchema.virtual('image').set((image)=>{
 });
 
 // Exporting Model
-module.exports = mongoose.model
+module.exports = mongoose.model('Comment',CommentSchema);

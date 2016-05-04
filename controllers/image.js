@@ -14,7 +14,7 @@ module.exports = {
         // Loading image from models
         Models.Image.findOne(
             {filename: {$regex: req.params.image_id}},
-            (err, image)=>{
+            function(err, image){
                 if(err){throw err;}
                 if(image){
                     // Increment image counter
@@ -25,7 +25,7 @@ module.exports = {
                     // using mongoose schema
                     image.save();
                     Models.Comment.find({
-                        image_id: image._id
+                        image_id: image._id // Checkid
                     },{},{
                         sort:{'timestamp': 1}
                     },(err, comments)=>{
@@ -72,6 +72,7 @@ module.exports = {
                             });
                             // Save the new image
                             newImg.save((err, image)=>{
+                                if(err) throw err;
                                 console.log(`> Succefully inserted image: ${image.filename}`);
                                 res.redirect('/images/' + imgUrl);
                             });

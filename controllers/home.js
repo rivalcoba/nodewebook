@@ -1,7 +1,7 @@
 var sidebar = require('../helpers/sidebar');
 // Importing Image model from our 
 // dictionary models
-ImageModel = require('../models').Image;
+var ImageModel = require('../models').Image;
 
 module.exports = {
     index: function (req, res) {

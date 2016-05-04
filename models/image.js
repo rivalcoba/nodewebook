@@ -15,8 +15,9 @@ var ImageSchema = new Schema({
 
 // Virtuals
 ImageSchema.virtual('uniqueId').
-get(()=>{
+get(function(){
     // Removing extension from filename
+    var file = this.filename;
     return this.filename.replace(
         path.extname(this.filename),'');
 });
