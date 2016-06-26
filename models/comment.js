@@ -13,9 +13,9 @@ var CommentSchema = new Schema({
 });
 
 // Create a virtual
-CommentSchema.virtual('image').set((image)=>{
+CommentSchema.virtual('image').set(function(image){
     this._image = image;
-}).get(()=>{
+}).get(function(){
     return this._image;
 });
 

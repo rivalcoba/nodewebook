@@ -1,1 +1,1 @@
-- todo 2781 the like button and updating an image model
+- todo sidebar helper 2939

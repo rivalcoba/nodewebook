@@ -11,6 +11,9 @@ $(function(){
     $('#post-comment').hide();
     $('#btn-comment').on('click',function(event){
         event.preventDefault();
-        $('#post-comment').show();
+        if($('#post-comment').is(':visible'))
+            $('#post-comment').hide();
+        else
+            $('#post-comment').show();
     });
 });
