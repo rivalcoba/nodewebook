@@ -16,6 +16,7 @@ module.exports = {
         models.Comment.find({},{},{
             limit: 5, sort: {'timestamp': -1}
         },function(err, comments){
+            console.log("> Lastly Five comments: " + JSON.stringify(comments));
             async.each(comments, attachImage, function(err){
                 if(err) throw err;
                 callback(err, comments);
