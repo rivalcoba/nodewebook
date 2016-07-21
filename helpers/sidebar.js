@@ -6,10 +6,13 @@ var Stats = require("./stats"),
 module.exports = function(viewModel, callback){
     async.parallel([
         function(next){
+            console.log("> Stats invoked...");
             Stats(next);
         }, function(next){
+            console.log("> Images invoked...");
             Images.popular(callback);
         }, function(next){
+            console.log("> Comments invoked...");
             Comments.newest(next);
         }
     ], function(err, results){

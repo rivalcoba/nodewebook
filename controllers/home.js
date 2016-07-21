@@ -13,11 +13,11 @@ module.exports = {
         // Second Object: Projection or maps
         // Query options
         ImageModel.find({}, {}, { sort: { timestamp: -1 } }, 
-        (err, images) => {
+        function(err, images){
             if (err) { throw err; }
             viewModel.images = images;
             sidebar(viewModel, function (viewModel) {
-                console.log("Sidebar: " +JSON.stringify(viewModel.sidebar));
+                console.log("> Sidebar: " + JSON.stringify(viewModel.sidebar));
                 res.render('index', viewModel);
             });
         });
