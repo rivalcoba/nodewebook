@@ -4,7 +4,8 @@
   "description": "Sistema desarrollo web con Node",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "keywords": [
     "node",
@@ -26,5 +27,8 @@
     "mongoose": "^4.4.10",
     "morgan": "^1.7.0",
     "multer": "^1.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
   }
 }
