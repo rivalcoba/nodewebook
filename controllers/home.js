@@ -16,7 +16,7 @@ module.exports = {
         function(err, images){
             if (err) { throw err; }
             viewModel.images = images;
-            sidebar(viewModel, function (viewModel) {
+            sidebar(viewModel, function(viewModel) {
                 console.log("> Sidebar: " + JSON.stringify(viewModel.sidebar));
                 res.render('index', viewModel);
             });

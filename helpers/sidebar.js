@@ -10,7 +10,7 @@ module.exports = function(viewModel, callback){
             Stats(next);
         }, function(next){
             console.log("> Images invoked...");
-            Images.popular(callback);
+            Images.popular(next);
         }, function(next){
             console.log("> Comments invoked...");
             Comments.newest(next);
