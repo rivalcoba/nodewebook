@@ -127,5 +127,26 @@ module.exports = {
                 res.redirect('./');
             }
         });
+    },
+    // Remove Action Methods
+    remove : function(req, res){
+        // Finding the image to be deleted
+        Models.Image.findOne({filename: {$regex : req.params.image_id}}, function(err, image){
+            if(err){
+                console.log('> Error: image.js remove fn ');
+                throw err;
+            }
+            // Delete images
+            fs.unlink
+            (path.resolve('./public/upload/' + image.filename),
+            function(err){
+                if(err){
+                    console.log("> Error: image.js remove fn");
+                    throw err;
+                }
+                Models.Comment.remove
+                ({image_id: image._id}); //TODO
+            });
+        });
     }
 }

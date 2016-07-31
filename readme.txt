@@ -1,1 +1,1 @@
-- todo sidebar helper 3058 probar sidebar
+- Adding removing capability
