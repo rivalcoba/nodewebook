@@ -131,7 +131,8 @@ module.exports = {
     // Remove Action Methods
     remove : function(req, res){
         // Finding the image to be deleted
-        Models.Image.findOne({filename: {$regex : req.params.image_id}}, function(err, image){
+        Models.Image.findOne({filename: {$regex : req.params.image_id}}, 
+        function(err, image){
             if(err){
                 console.log('> Error: image.js remove fn ');
                 throw err;
@@ -145,7 +146,18 @@ module.exports = {
                     throw err;
                 }
                 Models.Comment.remove
-                ({image_id: image._id}); //TODO
+                ({image_id: image._id}, function(err){
+                    if(!err){
+                        console.log("> Se borran comentarios de image");
+                        image.remove(function(err){
+                            if(!err){
+                                res.json(true);
+                            }else{
+                                res.json(false);
+                            }
+                        });
+                    }
+                });
             });
         });
     }
