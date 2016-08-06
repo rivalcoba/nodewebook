@@ -1,0 +1,25 @@
+{
+  "name": "nodewebook",
+  "description": "Sistema desarrollo web con Node",
+  "main": "server.js",
+  "authors": [
+    "Rivalcoba"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "node",
+    "web"
+  ],
+  "homepage": "https://github.com/rivalcoba/nodewebook",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert2": "^4.1.2"
+  }
+}
